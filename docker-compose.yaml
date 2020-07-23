@@ -1,0 +1,20 @@
+version: '3.1'
+services:
+  php:
+    build:
+      context: .
+      dockerfile: ./tools/php/Dockerfile
+    volumes:
+      - "./api:/var/www/html"
+      - "./tools/php/local.ini:/usr/local/etc/php/conf.d/local.ini"
+  web-server:
+    build:
+      context: .
+      dockerfile: ./tools/nginx/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - "./api:/var/www/html"
+      - "./tools/nginx/conf.d:/etc/nginx/conf.d"
+      - "./tools/nginx/nginx.conf:/etc/nginx/nginx.conf"
+      - "./tools/nginx/sites-enabled:/etc/nginx/sites-enabled"
