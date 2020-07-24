@@ -13,10 +13,15 @@
 |
 */
 
+use Illuminate\Http\Response;
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
 $router->get('/info', function () use($router){
     return phpinfo();
+});
+
+$router->get('/home', function() {
+    return response()->json(['name' => 'Abigail', 'state' => 'CA']);
 });
