@@ -7,3 +7,14 @@ HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep 
 chgrp -R ${HTTPDUSER} storage bootstrap/cache
 chmod -R ug+rwx storage bootstrap/cache
 ```
+
+## MySQL
+
+```
+CREATE USER 'api'@'%' IDENTIFIED BY 'wwGwx4P9HhCCGXVV';
+CREATE USER 'api'@'localhost' IDENTIFIED BY 'wwGwx4P9HhCCGXVV';
+CREATE DATABASE IF NOT EXISTS api;
+grant all privileges on api.* to 'api'@'localhost';
+grant all privileges on api.* to 'api'@'%';
+flush privileges;
+```
