@@ -14,14 +14,22 @@
 */
 
 use Illuminate\Http\Response;
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/info', function () use($router){
+$router->get('/info', function () use ($router) {
     return phpinfo();
 });
 
-$router->get('/home', function() {
+$router->get('/home', function () {
     return response()->json(['name' => 'Abigail', 'state' => 'CA']);
+});
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->get('/', function () {
+        return response()->json(["message" => "hello world!"]);
+    });
+    $router->post('register', 'AuthController@register');
 });

@@ -14,8 +14,12 @@ class CreateUserPasswords extends Migration
     public function up()
     {
         Schema::create('user_passwords', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger("user_id");
+            $table->string("password");
+            $table->boolean("active")->default(false);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
         });
     }
 
